@@ -10,9 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "aframe": "^1.6.0",
+    "aframe-extras": "^7.5.0",
+    "aframe-react": "^4.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-photo-sphere-viewer": "^5.0.2-psv5.7.1"
+    
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

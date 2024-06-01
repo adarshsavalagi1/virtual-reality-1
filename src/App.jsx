@@ -1,25 +1,35 @@
-import { ReactPhotoSphereViewer } from 'react-photo-sphere-viewer';
+import 'aframe';
+import 'aframe-extras';
 import React, { useEffect, useState } from 'react';
+import { Entity, Scene } from 'aframe-react';
 import Image1 from './assets/1.jpg';
 import Image2 from './assets/2.jpg';
 
-function App() {
-  
-  const [image, setImage] = useState(1);
-  const [zoom,setZoom]= useState(0);
-  const changeZoom=(obj)=>{console.log(obj.zoomLevel);setZoom(0)}
-  useEffect(()=>{console.log(zoom)},[zoom])
+function VRViewer() {
+  const [image, setImage] = useState(Image1);
+
   const changeImage = () => {
-    setImage(image === 1 ? 2 : 1);
-  }
-  
+    setImage(image === Image1 ? Image2 : Image1);
+  };
+
   return (
-    <div className="App">
-      {image == 1 && <ReactPhotoSphereViewer src={Image1} onZoomChange={changeZoom} defaultZoomLvl={0} height={'100vh'} width={"100%"}></ReactPhotoSphereViewer>}
-      {image == 2 && <ReactPhotoSphereViewer src={Image2} height={'100vh'} defaultZoomLvl={0} width={"100%"}></ReactPhotoSphereViewer>}
-      <button onClick={changeImage}>hi</button>
+    <div>
+      <Scene>
+        <Entity primitive="a-sky" src={image} />
+        <Entity primitive="a-camera" wasd-controls-enabled="true">
+          <Entity
+            cursor="fuse: true; fuseTimeout: 500"
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: #CCC; shader: flat"
+          />
+        </Entity>
+      </Scene>
+      <button onClick={changeImage} style={{ position: 'absolute', top: '10px', left: '10px' }}>
+        Change Image
+      </button>
     </div>
   );
 }
 
-export default App;
+export default VRViewer;
