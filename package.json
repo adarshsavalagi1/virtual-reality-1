@@ -15,8 +15,8 @@
     "aframe-react": "^4.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-photo-sphere-viewer": "^5.0.2-psv5.7.1"
-    
+    "react-photo-sphere-viewer": "^5.0.2-psv5.7.1",
+    "react-router-dom": "^6.24.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
@@ -26,6 +26,8 @@
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
     "vite": "^5.2.0"
   }
 }
