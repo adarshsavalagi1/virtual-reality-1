@@ -5,7 +5,7 @@ const WebSocketComponent = () => {
   const [coordinates, setCoordinates] = useState({ grid_x: null, grid_y: null });
 
   useEffect(() => {
-    const ws = new WebSocket('ws://192.168.1.44:8000/ws/coordinates');
+    const ws = new WebSocket('wss://192.168.1.44:8000/ws/coordinates');
 
     ws.onopen = () => {
       console.log('WebSocket connected');

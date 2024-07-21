@@ -42,12 +42,17 @@ function VRViewer() {
   };
 
   const [image, setImage] = useState(imageMap['one_one']);
-  const [address, setAddress] = useState('ws://192.168.1.44:8000/ws/coordinates');
+  const [address, setAddress] = useState('wss://192.168.1.44:8000/ws/coordinates');
   const [got, setGot] = useState(false);
+  const [animationClass, setAnimationClass] = useState('zoom-in'); // For triggering CSS animation
 
   const changeImage = (imageName) => {
     if (imageMap[imageName]) {
-      setImage(imageMap[imageName]);
+      setAnimationClass('zoom-out');
+      setTimeout(() => {
+        setImage(imageMap[imageName]);
+        setAnimationClass('zoom-in');
+      }, 500); // Match this time with the duration of the zoom-out effect
     } else {
       console.warn(`Image with name ${imageName} not found`);
     }
@@ -145,7 +150,11 @@ function VRViewer() {
       {got && (
         <div>
           <Scene>
-            <Entity primitive="a-sky" src={image} />
+            <Entity
+              primitive="a-sky"
+              src={image}
+              className={animationClass} // Apply CSS class for animation
+            />
             <Entity primitive="a-camera" wasd-controls-enabled="true">
               <Entity
                 cursor="fuse: true; fuseTimeout: 500"
@@ -155,6 +164,36 @@ function VRViewer() {
               />
             </Entity>
           </Scene>
+          <style jsx>{`
+            .zoom-in {
+              animation: zoomIn 0.5s ease-in forwards;
+            }
+            .zoom-out {
+              animation: zoomOut 0.5s ease-out forwards;
+            }
+
+            @keyframes zoomIn {
+              from {
+                transform: scale(0.8);
+                opacity: 0;
+              }
+              to {
+                transform: scale(1);
+                opacity: 1;
+              }
+            }
+
+            @keyframes zoomOut {
+              from {
+                transform: scale(1);
+                opacity: 1;
+              }
+              to {
+                transform: scale(0.8);
+                opacity: 0;
+              }
+            }
+          `}</style>
         </div>
       )}
     </>
