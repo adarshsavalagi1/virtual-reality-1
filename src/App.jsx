@@ -63,7 +63,7 @@ function VRViewer() {
 
     const connect = () => {
       socket = new WebSocket(address);
-      alert('Connecting to server...');
+      // alert('Connecting to server...');
 
       socket.addEventListener('open', function (event) {
         console.log('Connected to server');
@@ -83,7 +83,7 @@ function VRViewer() {
 
       socket.addEventListener('error', function (event) {
         console.log('Error: ', event);
-        alert('Error connecting to server');
+        // alert('Error connecting to server');
       });
     };
 
